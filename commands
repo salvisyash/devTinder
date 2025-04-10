@@ -1,0 +1,5 @@
+npm init  ------------->  Initialize the new project (create package .json)
+
+npm install  ------------->  Download all dependancies from package.json file
+
+git init  ------------->  Initialize the git repository
