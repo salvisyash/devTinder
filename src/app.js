@@ -2,28 +2,24 @@ const express = require("express");
 
 const app = express();
 
-app.use("/user", (req, res) => {
-    console.log(req.query)
-    res.send({firstname: "Yash", lastname: "Salvi"});
+const { adminAuth, userAuth } = require("./middlewares/auth")
+
+app.use("/admin", adminAuth);
+
+app.get("/user/login", (req,res) => {
+    res.send("User logged in successfully!");
 });
 
-// This will only handle GET call to /user
-app.get("/user", (req, res) => {
-    res.send({firstname: "Yash", lastname: "Salvi"});
+app.get("/user", userAuth, (req,res) => {
+    res.send("User data sent");
 });
 
-app.post("/user", (req, res) => {
-    // saving data to DB
-    res.send("Data successfully saved to the database!");
+app.get("/admin/getAllData", (req,res) => {
+    res.send("All data sent");
 });
 
-app.delete("/user", (req, res) => {
-    res.send("Deleted successfully!");
-});
-
-// This will match all http methods API call to /test
-app.use("/test", (req, res) => {
-    res.send("Hello from the server !");
+app.get("/admin/deleteUser", (req,res) => {
+    res.send("Deleted user");
 });
 
 app.listen(3000, () => {
